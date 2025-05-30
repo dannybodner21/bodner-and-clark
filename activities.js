@@ -41,7 +41,7 @@
 
     // address autocomplete stuff
     let autocomplete;
-    function initAutocomplete() {
+    window.initAutocomplete = function () {
       const addressInput = document.getElementById("address-input");
       autocomplete = new google.maps.places.Autocomplete(addressInput, {
         types: ["address"],
@@ -50,12 +50,8 @@
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         const selectedAddress = place.formatted_address || "";
-        console.log("✅ Selected Address:", selectedAddress);
-        // Optional: Store in a hidden input
-        //const hidden = document.getElementById("selected-address");
-        //if (hidden) hidden.value = selectedAddress;
       });
-    }
+    };
     window.initAutocomplete = initAutocomplete;
 
     function createOwnershipInputs(start, amountOfOwners, elementID) {
