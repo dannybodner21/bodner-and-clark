@@ -429,19 +429,14 @@
       window.$memberstackDom.getCurrentMember().then(({ data: member }) => {
         if (member) {
           const userEmail = member.auth.email;
-          fetchAirtableUserID(userEmail)
-            .then((airtableUserID) => {
-              if (airtableUserID) {
-                fetchUserActivities(airtableUserID);
-                fetchTeamMemberDetails(airtableUserID);
-                activitiesLoadingDiv.style.display = "none";
-              } else {
-                console.error("error with Airtable");
-              }
-            })
-            .catch((error) => {
-              console.error("Error retrieving the logged-in user's email:", error);
-          });
+          const airtableUserID = await fetchAirtableUserID(userEmail);
+          if (airtableUserID) {
+            fetchUserActivities(airtableUserID);
+            fetchTeamMemberDetails(airtableUserID);
+            activitiesLoadingDiv.style.display = "none";
+          } else {
+            console.error("error with Airtable");
+          }
         }
       });
   
