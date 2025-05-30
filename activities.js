@@ -404,17 +404,29 @@
       updateOwnershipDropdowns();
   
       window.$memberstackDom.getCurrentMember().then(({ data: member }) => {
-        if (member) {
-          const userEmail = member.auth.email;
-          const airtableUserID = await fetchAirtableUserID(userEmail);
-          if (airtableUserID) {
-            fetchUserActivities(airtableUserID);
-            fetchTeamMemberDetails(airtableUserID);
-            activitiesLoadingDiv.style.display = "none";
-          } else {
-            console.error("error with Airtable");
-          }
-        }
+          if (member) {
+            const userEmail = member.auth.email;
+            fetchAirtableUserID(userEmail)
+                .then((airtableUserID) => {
+                  if (airtableUserID) {
+  
+                      // fetch user's Activities
+                      fetchUserActivities(customUserID);
+  
+                      // fetch user's Team Members
+                      fetchTeamMemberDetails(customUserID);
+  
+                      // hide loading div
+                      activitiesLoadingDiv.style.display = "none";
+  
+                  } else {
+                    console.error("No Airtable User ID found for the logged-in user.");
+                  }
+             })
+             .catch((error) => {
+               console.error("Error retrieving the logged-in user's email:", error);
+             });
+         }
       });
   
     });
