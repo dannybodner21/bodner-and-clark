@@ -52,7 +52,6 @@
         const selectedAddress = place.formatted_address || "";
       });
     };
-    window.initAutocomplete = initAutocomplete;
 
     function createOwnershipInputs(start, amountOfOwners, elementID) {
       const editAddedOwnersContainer = document.getElementById(elementID);
