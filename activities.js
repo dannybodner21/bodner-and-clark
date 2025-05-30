@@ -411,10 +411,10 @@
                   if (airtableUserID) {
   
                       // fetch user's Activities
-                      fetchUserActivities(customUserID);
+                      fetchUserActivities(airtableUserID);
   
                       // fetch user's Team Members
-                      fetchTeamMemberDetails(customUserID);
+                      fetchTeamMemberDetails(airtableUserID);
   
                       // hide loading div
                       activitiesLoadingDiv.style.display = "none";
