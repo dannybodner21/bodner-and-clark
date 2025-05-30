@@ -1,30 +1,7 @@
 
-<style>
-    option {
-      background-color: white;
-      color: #343f56;
-      border-radius: 10px;
-      margin: 5px;
-      padding-top: 5px;
-      padding-bottom: 5px;
-    }
-    option:hover {
-      background-color: #b3cbff;
-      padding-left: 10px;
-    }
-    option:checked {
-      color: #343f56;
-      background: blue linear-gradient(0deg, #abf5ff 0%, #afd9fa 100%);
-      padding-left: 10px;
-    }
-    select[multiple]:focus option:checked {
-      background: blue linear-gradient(0deg, #abf5ff 0%, #afd9fa 100%);
-      color: #343f56;
-      padding-left: 10px;
-    }
-  </style>
+
   
-  <script>
+
 
     // using this to store all user Activity IDs
     // this way I can easily restore all of them if the user decides
@@ -1233,6 +1210,6 @@
       const hoveredOption = selection.options[selection.selectedIndex].value;
     });
   
-  </script>
+
   
   
