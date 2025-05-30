@@ -40,18 +40,8 @@
     let currentEditingOwnershipIDs = [];
 
     // address autocomplete stuff
-    let autocomplete;
-    window.initAutocomplete = function () {
-      const addressInput = document.getElementById("address-input");
-      autocomplete = new google.maps.places.Autocomplete(addressInput, {
-        types: ["address"],
-        fields: ["formatted_address"],
-      });
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        const selectedAddress = place.formatted_address || "";
-      });
-    };
+    // TODO
+
 
     function createOwnershipInputs(start, amountOfOwners, elementID) {
       const editAddedOwnersContainer = document.getElementById(elementID);
@@ -1250,8 +1240,4 @@
   
   </script>
   
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRxBg5KJUHP7Se2cHQGh-LDUzG2M5NczI&callback=initAutocomplete&libraries=places&v=weekly"
-    defer
-  ></script>
   
