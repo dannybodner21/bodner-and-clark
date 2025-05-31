@@ -1223,7 +1223,7 @@
                 selectionLabel.style.color = "#2b2b2b";
                 realEstateTradeOrBusinessDiv.appendChild(selectionLabel);
               }
-              newActivityDiv.appendChild(realEstateTradeOrBusinessDiv);
+              newActivityLeft.appendChild(realEstateTradeOrBusinessDiv);
             }
   
             newActivityDiv.appendChild(newActivityLeft);
