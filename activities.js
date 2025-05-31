@@ -1,4 +1,5 @@
 
+
     // using this to store all user Activity IDs
     // this way I can easily restore all of them if the user decides
     // to restore soft deleted Activities
@@ -687,9 +688,19 @@
             }
     
             // end popup form stuff -------------------------------------------
+
+            // div for each activity display
             const newActivityDiv = document.createElement("div");
             newActivityDiv.classList.add("display-div");
             newActivityDiv.classList.add("activity");
+
+            // div for left half of activity display
+            const newActivityLeft = document.createElement("div");
+            newActivityLeft.classList.add("activity-left");
+
+            // div for right half of activity display
+            const newActivityRight = document.createElement("div");
+            newActivityRight.classList.add("activity-right");
   
             const activityText = document.createElement("p");
             activityText.classList.add("display-text");
@@ -700,10 +711,12 @@
                 const groupName = record.fields["Name (from Activities Group)"][0];
                 const nameAndGroup = activityName + " | Group: " + groupName;
                 activityText.textContent = nameAndGroup;
-                newActivityDiv.appendChild(activityText);
+                //newActivityDiv.appendChild(activityText);
+                newActivityLeft.appendChild(activityText);
               } else {
                 activityText.textContent = activityName;
-                newActivityDiv.appendChild(activityText);
+                //newActivityDiv.appendChild(activityText);
+                newActivityLeft.appendChild(activityText);
               }
             }
   
@@ -717,7 +730,8 @@
   
             if (activityType) {
               activityTypeElement.textContent = finalTypeString;
-              newActivityDiv.appendChild(activityTypeElement);
+              //newActivityDiv.appendChild(activityTypeElement);
+              newActivityLeft.appendChild(activityTypeElement);
             }
   
             // check if there is a address and create element
@@ -729,7 +743,8 @@
               activityAddressElement.style.fontSize = "12px";
               activityAddressElement.style.marginLeft = "20px";
               activityAddressElement.textContent = finalAddressString;
-              newActivityDiv.appendChild(activityAddressElement);
+              //newActivityDiv.appendChild(activityAddressElement);
+              newActivityLeft.appendChild(activityAddressElement);
             }
   
             // check if there is an EIN and create element
@@ -742,7 +757,8 @@
               activityEINElement.style.fontSize = "12px";
               activityEINElement.style.marginLeft = "20px";
               activityEINElement.textContent = formattedEIN;
-              newActivityDiv.appendChild(activityEINElement);
+              //newActivityDiv.appendChild(activityEINElement);
+              newActivityLeft.appendChild(activityEINElement);
             }
   
             // add a soft delete button
@@ -752,7 +768,8 @@
             // for the delete button id I am using the Activity ID so we
             // know what to delete
             deleteActivityButton.id = record.id;
-            newActivityDiv.appendChild(deleteActivityButton);
+            //newActivityDiv.appendChild(deleteActivityButton);
+            newActivityRight.appendChild(deleteActivityButton);
   
             // function for the delete Activity button
             deleteActivityButton.addEventListener("click", async function () {
@@ -981,7 +998,8 @@
 
             });
 
-            newActivityDiv.appendChild(editActivityButton);
+            //newActivityDiv.appendChild(editActivityButton);
+            newActivityRight.appendChild(editActivityButton);
 
             const submitEditsButton = document.getElementById("edit-form-submit-button");
             submitEditsButton.onclick = null;
@@ -1118,7 +1136,8 @@
             assignTeamMemberButton.innerText = "View / Assign Team Members to this Activity";
             assignTeamMemberButton.classList.add("assign-team-member-button");
             assignTeamMemberButton.id = record.id + "-assign";
-            newActivityDiv.appendChild(assignTeamMemberButton);
+            //newActivityDiv.appendChild(assignTeamMemberButton);
+            newActivityRight.appendChild(assignTeamMemberButton);
   
             // function for the assign Team Member button
             assignTeamMemberButton.addEventListener("click", async function () {
@@ -1207,6 +1226,9 @@
               newActivityDiv.appendChild(realEstateTradeOrBusinessDiv);
             }
   
+            newActivityDiv.appendChild(newActivityLeft);
+            newActivityDiv.appendChild(newActivityRight);
+
             // add to the activity display section
             if (activitiesDisplaySection) {
               activitiesDisplaySection.appendChild(newActivityDiv);
@@ -1237,5 +1259,6 @@
       const hoveredOption = selection.options[selection.selectedIndex].value;
     });
   
+
   
   
