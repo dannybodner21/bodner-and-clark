@@ -1,8 +1,4 @@
 
-
-  
-
-
     // using this to store all user Activity IDs
     // this way I can easily restore all of them if the user decides
     // to restore soft deleted Activities
@@ -544,7 +540,6 @@
           }
 
           console.log("Details fetched successfully.");
-  
         } else {
           console.warn("No Team Members found for this user.");
         }
@@ -592,14 +587,34 @@
       } else {
         console.log("Error restoring Activities.");
       }
-  
     });
   
     // function to get a random color
-    function getDistinctColor(i, total) {
-      const funColors = ["#f09090","#ebbc71","#a4eb71","#71ebb4","#71dfeb","#71a2eb","#9d98eb","#e8b2ed","#faafca","#ebf065","#7dc98c","#67d0f0"];
-      const randomFunColor = funColors[Math.floor(Math.random() * funColors.length)];
-      return randomFunColor;
+    function getDistinctColor(selection) {
+      const funColors = ["#f09090","#ebbc71","#a4eb71","#71ebb4","#71dfeb","#71a2eb","#9d98eb","#e8b2ed","#faafca","#ebf065","#7dc98c"];
+      if (selection == "Development") {
+        return funColors[0];
+      } else if (selection == "Redevelopment") {
+        return funColors[1];
+      } else if (selection == "Construction") {
+        return funColors[2];
+      } else if (selection == "Reconstruction") {
+        return funColors[3];
+      } else if (selection == "Acquisition") {
+        return funColors[4];
+      } else if (selection == "Conversion") {
+        return funColors[5];
+      } else if (selection == "Rental") {
+        return funColors[6];
+      } else if (selection == "Operations") {
+        return funColors[7];
+      } else if (selection == "Management") {
+        return funColors[8];
+      } else if (selection == "Leasing") {
+        return funColors[9];
+      } else {
+        return funColors[10];
+      }
     }
 
     // get all the user's Activities data
@@ -1184,7 +1199,7 @@
                 selectionLabel.style.borderRadius = "20px";
                 selectionLabel.style.textAlign = "center";
                 selectionLabel.innerText = selections[i];
-                const randomColor = getDistinctColor(i, selections.length);
+                const randomColor = getDistinctColor(selections[i]);
                 selectionLabel.style.backgroundColor = randomColor;
                 selectionLabel.style.color = "#2b2b2b";
                 realEstateTradeOrBusinessDiv.appendChild(selectionLabel);
@@ -1222,6 +1237,5 @@
       const hoveredOption = selection.options[selection.selectedIndex].value;
     });
   
-
   
   
