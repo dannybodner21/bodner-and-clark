@@ -1,4 +1,5 @@
 
+
     // using this to store all user Activity IDs
     // this way I can easily restore all of them if the user decides
     // to restore soft deleted Activities
@@ -765,8 +766,7 @@
             const deleteImage = document.createElement('img');
             deleteImage.src = 'https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683b299239d69308b3d1fd2c_delete.png';
             deleteImage.alt = 'Delete';
-            deleteImage.style.width = '35px';
-            deleteImage.style.height = '35px';
+            deleteImage.classList.add("delete-image");
             deleteActivityButton.appendChild(deleteImage);
 
             deleteActivityButton.classList.add("delete-activity-button");
@@ -811,8 +811,7 @@
             const editImage = document.createElement('img');
             editImage.src = 'https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683b2992ccc2f9f597ff24d9_editing.png';
             editImage.alt = 'Edit';
-            editImage.style.width = '35px';
-            editImage.style.height = '35px';
+            editImage.classList.add("edit-image");
             editActivityButton.appendChild(editImage);
             
             editActivityButton.classList.add("edit-time-entry-button");
