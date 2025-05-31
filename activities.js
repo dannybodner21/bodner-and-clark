@@ -695,11 +695,11 @@
 
             // div for left half of activity display
             const newActivityLeft = document.createElement("div");
-            newActivityLeft.classList.add("activity-left");
+            newActivityLeft.classList.add("new-activity-left");
 
             // div for right half of activity display
             const newActivityRight = document.createElement("div");
-            newActivityRight.classList.add("activity-right");
+            newActivityRight.classList.add("new-activity-right");
   
             const activityText = document.createElement("p");
             activityText.classList.add("display-text");
@@ -762,7 +762,13 @@
   
             // add a soft delete button
             const deleteActivityButton = document.createElement("button");
-            deleteActivityButton.innerText = "Delete";
+            const deleteImage = document.createElement('img');
+            deleteImage.src = 'https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683b299239d69308b3d1fd2c_delete.png';
+            deleteImage.alt = 'Delete';
+            deleteImage.style.width = '35px';
+            deleteImage.style.height = '35px';
+            deleteActivityButton.appendChild(deleteImage);
+
             deleteActivityButton.classList.add("delete-activity-button");
             // for the delete button id I am using the Activity ID so we
             // know what to delete
@@ -1262,5 +1268,8 @@
     const selection = document.getElementById("trade-or-business-values");
     selection.addEventListener("mouseover", () => {
       const hoveredOption = selection.options[selection.selectedIndex].value;
-    });  
+    });
+  
+
+  
   
