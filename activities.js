@@ -816,7 +816,7 @@
             editImage.classList.add("edit-image");
             editActivityButton.appendChild(editImage);
             
-            editActivityButton.classList.add("edit-time-entry-button");
+            editActivityButton.classList.add("edit-activity-button");
             editActivityButton.id = "edit-" + record.id;
 
             // radio button functions
