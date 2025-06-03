@@ -1,8 +1,5 @@
 
 
-
-
-
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -885,9 +882,11 @@
           if (record.fields["Locked"] == "FALSE") {
             // soft delete button
             deleteTimeEntryButton = document.createElement("button");
-            deleteTimeEntryButton.innerText = "Delete";
-            deleteTimeEntryButton.style.color = "#eb4034";
-            deleteTimeEntryButton.style.backgroundColor = "white";
+            const deleteImage = document.createElement('img');
+            deleteImage.src = 'https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683b299239d69308b3d1fd2c_delete.png';
+            deleteImage.alt = 'Delete';
+            deleteImage.classList.add("delete-image");
+            deleteTimeEntryButton.appendChild(deleteImage);
             deleteTimeEntryButton.classList.add("delete-time-entry-button");
             // for the delete button ID I am using the Time Entry ID so we
             // know what to delete
@@ -986,7 +985,11 @@
 
           // edit button
           const editTimeEntryButton = document.createElement("button");
-          editTimeEntryButton.innerText = "Edit";
+          const editImage = document.createElement('img');
+          editImage.src = 'https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683b2992ccc2f9f597ff24d9_editing.png';
+          editImage.alt = 'Edit';
+          editImage.classList.add("edit-image");
+          editTimeEntryButton.appendChild(editImage);
           editTimeEntryButton.classList.add("edit-time-entry-button");
           editTimeEntryButton.id = "edit-" + record.id;
 
@@ -1111,9 +1114,9 @@
 
             if (record.fields["Locked"] == "FALSE") {
               rightDiv.appendChild(deleteTimeEntryButton);
+              rightDiv.appendChild(editTimeEntryButton);
             }
 
-            rightDiv.appendChild(editTimeEntryButton);
             rightDiv.appendChild(duplicateTimeEntryButton);
             rightDiv.appendChild(lockImage);
             rightContainer.appendChild(middleDiv);
@@ -1295,5 +1298,4 @@
     document.addEventListener("click", outsideClickHandler);
   }, 0);
 }
-
 
