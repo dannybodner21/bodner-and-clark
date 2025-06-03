@@ -1,5 +1,4 @@
 
-
     // using this to store all user Activity IDs
     // this way I can easily restore all of them if the user decides
     // to restore soft deleted Activities
@@ -773,8 +772,14 @@
             // for the delete button id I am using the Activity ID so we
             // know what to delete
             deleteActivityButton.id = record.id;
-            //newActivityDiv.appendChild(deleteActivityButton);
-            newActivityRight.appendChild(deleteActivityButton);
+
+            const topRightDiv = document.createElement("div");
+            topRightDiv.style.display = "flex";
+            topRightDiv.style.flexDirection = "row";
+            topRightDiv.style.gap = "15px";
+
+            topRightDiv.appendChild(deleteActivityButton);
+            //newActivityRight.appendChild(deleteActivityButton);
   
             // function for the delete Activity button
             deleteActivityButton.addEventListener("click", async function () {
@@ -1008,8 +1013,9 @@
 
             });
 
-            //newActivityDiv.appendChild(editActivityButton);
-            newActivityRight.appendChild(editActivityButton);
+            topRightDiv.appendChild(editActivityButton);
+            //newActivityRight.appendChild(editActivityButton);
+            newActivityRight.appendChild(topRightDiv);
 
             const submitEditsButton = document.getElementById("edit-form-submit-button");
             submitEditsButton.onclick = null;
@@ -1269,6 +1275,5 @@
       const hoveredOption = selection.options[selection.selectedIndex].value;
     });
   
-
   
   
