@@ -777,9 +777,6 @@
             topRightDiv.style.display = "flex";
             topRightDiv.style.flexDirection = "row";
             topRightDiv.style.gap = "15px";
-
-            topRightDiv.appendChild(deleteActivityButton);
-            //newActivityRight.appendChild(deleteActivityButton);
   
             // function for the delete Activity button
             deleteActivityButton.addEventListener("click", async function () {
@@ -1013,8 +1010,9 @@
 
             });
 
+
             topRightDiv.appendChild(editActivityButton);
-            //newActivityRight.appendChild(editActivityButton);
+            topRightDiv.appendChild(deleteActivityButton);
             newActivityRight.appendChild(topRightDiv);
 
             const submitEditsButton = document.getElementById("edit-form-submit-button");
