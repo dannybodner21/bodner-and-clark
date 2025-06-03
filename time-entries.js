@@ -1,5 +1,4 @@
 
-
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -923,10 +922,11 @@
           }
 
           const duplicateTimeEntryButton = document.createElement("button");
-          duplicateTimeEntryButton.innerText = "Duplicate";
-          duplicateTimeEntryButton.style.color = "#348feb";
-          duplicateTimeEntryButton.style.backgroundColor = "white";
-
+          const duplicateImage = document.createElement('img');
+          duplicateImage.src = 'https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683e6b153372cc3c9585cfdd_duplicate.png';
+          duplicateImage.alt = 'Delete';
+          duplicateImage.classList.add("duplicate-image");
+          duplicateTimeEntryButton.appendChild(duplicateImage);
           duplicateTimeEntryButton.classList.add("duplicate-time-entry-button");
           // id is record.id-duplicate
           duplicateTimeEntryButton.id = `${record.id}-duplicate`;
