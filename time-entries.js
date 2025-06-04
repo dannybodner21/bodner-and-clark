@@ -1,5 +1,4 @@
 
-
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -8,6 +7,8 @@
   // for calendar
   let timeEntryDetails = [];
   let userTimeZone = "America/Los_Angeles";
+
+  let mainUserID = "";
 
   document.addEventListener('DOMContentLoaded', function () {
 
@@ -55,7 +56,7 @@
                 fetchCustomUserID(airtableUserID).then((customUserID) => {
 
                 	if (customUserID) {
-
+                    mainUserID = customUserID;
                     fetchAndPopulateDropdown(customUserID)
                       .then(() => populateActivityDropdown(customUserID))
                       .then(() => populateCategoryDropdown(customUserID))
@@ -117,10 +118,9 @@
     // add new entry button clicked -> populate dropdowns again
     const addEntryButton = document.getElementById('add-entry-button');
     addEntryButton.addEventListener("click", async () => {
-      const userID = hiddenUserInputField.value();
-      await fetchAndPopulateDropdown(userID);
-      await populateActivityDropdown(userID);
-      await populateCategoryDropdown(userID);
+      await fetchAndPopulateDropdown(mainUserID);
+      await populateActivityDropdown(mainUserID);
+      await populateCategoryDropdown(mainUserID);
     });
 
     // update the calendar with selected Team Members
