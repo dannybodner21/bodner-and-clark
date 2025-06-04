@@ -1,4 +1,5 @@
 
+
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -111,6 +112,15 @@
         teamMemberSelectionDiv.style.display = "none";
         expandArrowLabel.innerText = '⬇';
       }
+    });
+
+    // add new entry button clicked -> populate dropdowns again
+    const addEntryButton = document.getElementById('add-entry-button');
+    addEntryButton.addEventListener("click", async () => {
+      const userID = hiddenUserInputField.value();
+      await fetchAndPopulateDropdown(userID);
+      await populateActivityDropdown(userID);
+      await populateCategoryDropdown(userID);
     });
 
     // update the calendar with selected Team Members
@@ -924,7 +934,7 @@
           const duplicateTimeEntryButton = document.createElement("button");
           const duplicateImage = document.createElement('img');
           duplicateImage.src = 'https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683e6b153372cc3c9585cfdd_duplicate.png';
-          duplicateImage.alt = 'Delete';
+          duplicateImage.alt = 'Duplicate';
           duplicateImage.classList.add("duplicate-image");
           duplicateTimeEntryButton.appendChild(duplicateImage);
           duplicateTimeEntryButton.classList.add("duplicate-time-entry-button");
