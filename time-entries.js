@@ -382,7 +382,8 @@
             const imageUrl = record.fields["Image"]?.[0]?.url || "";
             option.setAttribute("data-image-url", imageUrl);
             dropdown.appendChild(option);
-            newTeamMemberDropdown.appendChild(option);
+            const clonedOption = option.cloneNode(true);
+            newTeamMemberDropdown.appendChild(clonedOption);
 
             if (index === 0 && imageUrl) {
               const imgElement = document.getElementById("team-member-image");
