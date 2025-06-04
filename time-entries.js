@@ -474,7 +474,8 @@
             option.value = record.id;
             option.textContent = activityName;
             activityDropdown.appendChild(option);
-            newActivityDropdown.appendChild(option);
+            const clonedActivityOption = option.cloneNode(true);
+            newActivityDropdown.appendChild(clonedActivityOption);
           }
         });
         console.log("Activity dropdown populated successfully.");
@@ -550,7 +551,8 @@
             option.value = record.id;
             option.textContent = categoryName;
             categoryDropdown.appendChild(option);
-            newCategoryDropdown.appendChild(option);
+            const clonedCategoryOption = option.cloneNode(true);
+            newCategoryDropdown.appendChild(clonedCategoryOption);
           }
         });
         console.log("Category dropdown populated successfully.");
