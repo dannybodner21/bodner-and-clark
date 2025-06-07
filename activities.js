@@ -703,6 +703,7 @@
   
             const activityText = document.createElement("p");
             activityText.classList.add("display-text");
+            activityText.style.paddingTop = "10px";
             const activityName = record.fields["Name"];
   
             if (activityName) {
