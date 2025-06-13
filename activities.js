@@ -210,6 +210,7 @@
         const zip = document.getElementById("zip-input").value.trim();
 
         const fullAddressString = `${street}, ${city}, ${state} ${zip}, ${country}`.trim();
+        console.log(fullAddressString);
         const fullAddress = document.getElementById("full-address");
         fullAddress.value = fullAddressString;
   
