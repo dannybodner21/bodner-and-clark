@@ -1,4 +1,30 @@
 
+<style>
+    option {
+      background-color: white;
+      color: #343f56;
+      border-radius: 10px;
+      margin: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    option:hover {
+      background-color: #b3cbff;
+      padding-left: 10px;
+    }
+    option:checked {
+      color: #343f56;
+      background: blue linear-gradient(0deg, #abf5ff 0%, #afd9fa 100%);
+      padding-left: 10px;
+    }
+    select[multiple]:focus option:checked {
+      background: blue linear-gradient(0deg, #abf5ff 0%, #afd9fa 100%);
+      color: #343f56;
+      padding-left: 10px;
+    }
+  </style>
+  
+
     // using this to store all user Activity IDs
     // this way I can easily restore all of them if the user decides
     // to restore soft deleted Activities
@@ -11,10 +37,6 @@
     let teamMemberDetails = {};
 
     let currentEditingOwnershipIDs = [];
-
-    // address autocomplete stuff
-    // TODO
-
 
     function createOwnershipInputs(start, amountOfOwners, elementID) {
       const editAddedOwnersContainer = document.getElementById(elementID);
@@ -204,6 +226,17 @@
       const activityFormSubmitButton = document.getElementById("activity-form-submit-button");
   
       activityFormFakeSubmitButton.addEventListener('click', function (event) {
+
+        // get address components and create one string
+        const street = document.getElementById("autocomplete").value.trim();
+        const city = document.getElementById("city-input").value.trim();
+        const state = document.getElementById("state-input").value.trim();
+        const country = document.getElementById("country-input").value.trim();
+        const zip = document.getElementById("zip-input").value.trim();
+
+        const fullAddressString = `${street}, ${city}, ${state} ${zip}, ${country}`.trim();
+        const fullAddress = document.getElementById("full-address");
+        fullAddress.value = fullAddressString;
   
         // store the data and pass to the form submission
         const ownershipData = [];
@@ -703,7 +736,6 @@
   
             const activityText = document.createElement("p");
             activityText.classList.add("display-text");
-            activityText.style.paddingTop = "10px";
             const activityName = record.fields["Name"];
   
             if (activityName) {
