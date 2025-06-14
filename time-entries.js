@@ -1,5 +1,4 @@
 
-
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -10,6 +9,16 @@
   let userTimeZone = "America/Los_Angeles";
 
   let mainUserID = "";
+
+  function waitForElement(selector, callback) {
+    const el = document.querySelector(selector);
+    if (el) {
+      callback(el);
+    } else {
+      setTimeout(() => waitForElement(selector, callback), 100);
+    }
+  }
+
 
   document.addEventListener('DOMContentLoaded', function () {
 
@@ -181,25 +190,25 @@
       const originalFormSubmitButton = document.getElementById("original-form-submit-button");
       const fakeFormSubmitButton = document.getElementById("fake-form-submit-button");
 
-      fakeFormSubmitButton.addEventListener('click', function() {
+      fakeSubmitButton.addEventListener('click', function() {
 
-      teamMemberInput.value = teamMemberName.textContent.trim();
-      userTimeZoneField.value = userTimeZone;
-      dateValue.value = dateFieldInput.value;
+        teamMemberInput.value = teamMemberName.textContent.trim();
+        userTimeZoneField.value = userTimeZone;
+        dateValue.value = dateFieldInput.value;
 
-      const hours = hoursField.value.padStart(2, '0');
-      const minutes = minutesField.value.padStart(2, '0');
+        const hours = hoursField.value.padStart(2, '0');
+        const minutes = minutesField.value.padStart(2, '0');
 
-      let hoursInSeconds = hoursField.value * 3600;
-      let minutesInSeconds = minutesField.value * 60;
-      let totalSeconds = hoursInSeconds + minutesInSeconds;
+        let hoursInSeconds = hoursField.value * 3600;
+        let minutesInSeconds = minutesField.value * 60;
+        let totalSeconds = hoursInSeconds + minutesInSeconds;
 
-      console.log(totalSeconds);
+        console.log(totalSeconds);
 
-      hiddenTimeField.value = totalSeconds;
-      hiddenTypeField.value = `new-time-entry-form`;
+        hiddenTimeField.value = totalSeconds;
+        hiddenTypeField.value = `new-time-entry-form`;
 
-      originalFormSubmitButton.click();
+        originalFormSubmitButton.click();
 
       });
 
