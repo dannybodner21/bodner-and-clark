@@ -20,7 +20,7 @@
     const userTimeZoneField = document.getElementById("user-time-zone-field");
     const hoursField = document.querySelector('input[name="hours"]');
     const minutesField = document.querySelector('input[name="minutes"]');
-    const hiddenTimeField = document.querySelector('input[name="time-string"]');
+    const hiddenTimeField = document.getElementById('time-string');
     const hiddenTypeField = document.querySelector('#form-type');
     const hiddenUserInputField = document.querySelector('#hidden-user-input');
     const teamMemberDropdown = document.getElementById("team-member-dropdown-2");
