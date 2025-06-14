@@ -1,4 +1,5 @@
 
+
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -179,8 +180,11 @@
       }
     });
 
-    // Listen for the form's submit event
-    form.addEventListener('submit', function (event) {
+    // fake submit form button - add things, then click actual submit button
+    const originalFormSubmitButton = document.getElementById("original-form-submit-button");
+    const fakeFormSubmitButton = document.getElementById("fake-form-submit-button");
+
+    fakeFormSubmitButton.addEventListener('click', function (event) {
 
       teamMemberInput.value = teamMemberName.textContent.trim();
       userTimeZoneField.value = userTimeZone;
@@ -197,6 +201,8 @@
 
       hiddenTimeField.value = totalSeconds;
       hiddenTypeField.value = `new-time-entry-form`;
+
+      originalFormSubmitButton.click();
 
     });
 
@@ -1313,4 +1319,3 @@
     document.addEventListener("click", outsideClickHandler);
   }, 0);
 }
-
