@@ -193,6 +193,8 @@
       let minutesInSeconds = minutesField.value * 60;
       let totalSeconds = hoursInSeconds + minutesInSeconds;
 
+      console.log(totalSeconds);
+
       hiddenTimeField.value = totalSeconds;
       hiddenTypeField.value = `new-time-entry-form`;
 
