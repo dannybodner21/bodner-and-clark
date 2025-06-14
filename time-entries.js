@@ -1,5 +1,4 @@
 
-
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -31,7 +30,6 @@
     const calendarSection = document.getElementById("calendar-section");
     const mainSection = document.getElementById("time-entries-display-section");
     const toggleSwitchSection = document.getElementById("toggle-switch-section");
-    const refreshPageButton = document.getElementById("refresh-time-entries-page-button");
     const expandDiv = document.getElementById("expand-div");
     const teamMemberSelectionDiv = document.getElementById("team-member-selection-div");
     const teamMemberCalendarForm = document.getElementById("wf-form-team-member-calendar-form");
@@ -82,10 +80,6 @@
              console.error("Error retrieving email:", error);
            });
        }
-    });
-
-    refreshPageButton.addEventListener("click", () => {
-      location.reload();
     });
 
     // expand and collapse team member selection for calendar view
@@ -1319,3 +1313,4 @@
     document.addEventListener("click", outsideClickHandler);
   }, 0);
 }
+
