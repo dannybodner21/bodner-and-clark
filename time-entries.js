@@ -1,4 +1,5 @@
 
+
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -189,6 +190,7 @@
       // fake submit form button - add things, then click actual submit button
       const originalFormSubmitButton = document.getElementById("original-form-submit-button");
       const fakeFormSubmitButton = document.getElementById("fake-form-submit-button");
+      const formBottomDiv = document.getElementById("form-bottom-div");
 
       fakeSubmitButton.addEventListener('click', function() {
 
@@ -206,14 +208,17 @@
         hiddenTimeField.value = totalSeconds;
         hiddenTypeField.value = `new-time-entry-form`;
 
-        fakeFormSubmitButton.textContent = "Working...";
-        fakeFormSubmitButton.disabled = true;
-
         originalFormSubmitButton.click();
 
       });
 
+      form.addEventListener('success', function () {
+        formBottomDiv.style.display = "none";
+      });
+
     });
+
+    
 
     
 
@@ -801,6 +806,7 @@
           const timeEntryActivityElement = document.createElement("p");
           timeEntryActivityElement.style.fontSize = "18px";
           timeEntryActivityElement.style.fontWeight = "700";
+          timeEntryActivityElement.style.paddingLeft = "25px";
           const activityID = record.fields["Activities"];
           // query the Activity name
           const timeEntryActivityText = await fetchActivityName(activityID);
@@ -825,7 +831,7 @@
           timeEntryTeamMemberElement.style.fontSize = "12px";
           timeEntryTeamMemberElement.style.fontWeight = "400";
           timeEntryTeamMemberElement.style.marginTop = "5px";
-          timeEntryTeamMemberElement.style.paddingLeft = "15px";
+          timeEntryTeamMemberElement.style.paddingLeft = "40px";
           const teamMemberID = record.fields["Team Members"];
           const timeEntryTeamMember = await fetchTeamMemberName(teamMemberID);
           const timeEntryTeamMemberText = `Team Member: ${timeEntryTeamMember}`;
@@ -839,7 +845,7 @@
           timeEntryNotesElement.style.fontSize = "12px";
           timeEntryNotesElement.style.fontWeight = "400";
           timeEntryNotesElement.style.marginTop = "5px";
-          timeEntryNotesElement.style.paddingLeft = "15px";
+          timeEntryNotesElement.style.paddingLeft = "40px";
           const notes = record.fields["Notes"] || "None";
           const timeEntryNotes = `Notes: ${notes}`;
 
@@ -966,18 +972,17 @@
 
           // show a lock, locked if the entry year is locked, otherwise unlcoked
           const lockImage = document.createElement("img");
+          lockImage.style.width = "55px";
+          lockImage.style.height = "50px";
+          lockImage.style.marginBottom = "10px";
 
           if (record.fields["Locked"] == "FALSE") {
             lockImage.src = "https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/67f4215f5db49131f6daca36_unlocked_icon.png";
             lockImage.alt = "Unlocked";
-            lockImage.style.width = "55px";
-            lockImage.style.height = "50px";
-
+            
           } else {
             lockImage.src = "https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/67f4215f78ba851b4b97d57d_locked_icon.png";
             lockImage.alt = "Locked";
-            lockImage.style.width = "55px";
-            lockImage.style.height = "50px";
           }
 
           duplicateTimeEntryButton.addEventListener("click", async function () {
@@ -1151,7 +1156,6 @@
             }
 
             rightDiv.appendChild(duplicateTimeEntryButton);
-            //rightDiv.appendChild(lockImage);
             leftDiv.prepend(lockImage);
             rightContainer.appendChild(middleDiv);
             rightContainer.appendChild(rightDiv);
