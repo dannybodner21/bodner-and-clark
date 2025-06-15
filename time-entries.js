@@ -207,11 +207,33 @@
 
     function updateFilePreview() {
       filePreview.innerHTML = "";
+
       pendingFiles.forEach((file, index) => {
-        const item = document.createElement("p");
-        item.textContent = `${index + 1}. ${file.name}`;
+        
+        const item = document.createElement("div");
+        item.style.display = "flex";
+        item.style.alignItems = "center";
+        item.style.justifyContent = "space-between";
+        item.style.marginBottom = "5px";
+
+        const fileName = document.createElement("span");
+        fileName.textContent = `${index + 1}. ${file.name}`;
+        item.appendChild(fileName);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "❌";
+        deleteButton.style.marginLeft = "10px";
+        deleteButton.style.cursor = "pointer";
+
+        deleteButton.addEventListener("click", () => {
+          pendingFiles.splice(index, 1);
+          updateFilePreview();
+        });
+
+        item.appendChild(deleteButton);
         filePreview.appendChild(item);
       });
+
     }
 
     async function uploadFilesToCloudinary() {
