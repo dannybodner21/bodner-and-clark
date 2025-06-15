@@ -1,5 +1,4 @@
 
-
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -19,7 +18,6 @@
       setTimeout(() => waitForElement(selector, callback), 100);
     }
   }
-
 
   document.addEventListener('DOMContentLoaded', function () {
 
@@ -222,6 +220,7 @@
         item.appendChild(fileName);
 
         const deleteButton = document.createElement("button");
+        deleteButton.style.backgroundColor = "transparent";
         deleteButton.textContent = "❌";
         deleteButton.style.marginLeft = "10px";
         deleteButton.style.cursor = "pointer";
@@ -263,12 +262,17 @@
 
     }
 
+    const formBottomDiv = document.getElementById("form-bottom-div");
+    form.addEventListener('success', function () {
+      formBottomDiv.style.display = "none";
+      console.log("form success reached.");
+    });
+
     waitForElement('#fake-form-submit-button', function(fakeSubmitButton) {
 
       // fake submit form button - add things, then click actual submit button
       const originalFormSubmitButton = document.getElementById("original-form-submit-button");
       const fakeFormSubmitButton = document.getElementById("fake-form-submit-button");
-      const formBottomDiv = document.getElementById("form-bottom-div");
 
       fakeSubmitButton.addEventListener('click', async function() {
 
@@ -299,10 +303,6 @@
         }
 
         originalFormSubmitButton.click();
-      });
-
-      form.addEventListener('success', function () {
-        formBottomDiv.style.display = "none";
       });
 
     });
