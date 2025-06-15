@@ -178,9 +178,9 @@
       const imgElement = document.getElementById("team-member-image");
 
       if (selectedImageUrl) {
-        imgElement.src = selectedImageUrl;
+        imgElement.style.backgroundImage = `url('${selectedImageUrl}')`;
       } else {
-        imgElement.src = "";
+        imgElement.style.backgroundImage = `url('https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683b386245d714537f5f2fb0_a1a0501fda490bd45f9c6db206c7ed8e_temp-user.png')`;
       }
     });
 
@@ -464,28 +464,25 @@
             colorMap[record.fields["Full Name"]] = randomColor;
           }
 
-          //const mainUserImageUrl = "";
+          const mainUserImageUrl = "";
           if (record.fields["Role"] == "Main User") {
             targetValue = record.id;
-
+            mainUserImageUrl = record.fields["Image"]?.[0]?.url || "https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683b386245d714537f5f2fb0_a1a0501fda490bd45f9c6db206c7ed8e_temp-user.png";
           }
 
           if (fullName) {
             const option = document.createElement("option");
             option.value = record.id;
             option.textContent = fullName;
-            const imageUrl = record.fields["Image"]?.[0]?.url || "";
+            const imageUrl = record.fields["Image"]?.[0]?.url || "https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683b386245d714537f5f2fb0_a1a0501fda490bd45f9c6db206c7ed8e_temp-user.png";
             option.setAttribute("data-image-url", imageUrl);
             dropdown.appendChild(option);
             const clonedOption = option.cloneNode(true);
             newTeamMemberDropdown.appendChild(clonedOption);
 
-            if (index === 0 && imageUrl) {
-              const imgElement = document.getElementById("team-member-image");
-              if (imgElement) {
-                imgElement.src = imageUrl;
-              }
-            }
+            const imgElement = document.getElementById("team-member-image");
+            imgElement.style.backgroundImage = `url('${mainUserImageUrl}')`;
+
 
             // populate the Team Member selection for calendar view
             const teamMemberLabel = document.createElement("label");
@@ -516,8 +513,12 @@
 
         const selectedOption = dropdown.options[dropdown.selectedIndex];
         const selectedImageUrl = selectedOption.getAttribute("data-image-url");
-        const imgElement = document.getElementById("team-member-image");
-        imgElement.src = selectedImageUrl || "";
+        const imgElementTwo = document.getElementById("team-member-image");
+        if (selectedImageUrl) {
+          imgElementTwo.style.backgroundImage = `url('${selectedImageUrl}')`;
+        } else {
+          imgElementTwo.style.backgroundImage = `url('https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683b386245d714537f5f2fb0_a1a0501fda490bd45f9c6db206c7ed8e_temp-user.png')`;
+        }
       }
 
     } catch (error) {
