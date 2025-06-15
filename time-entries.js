@@ -1,4 +1,5 @@
 
+
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -209,7 +210,7 @@
       filePreview.innerHTML = "";
 
       pendingFiles.forEach((file, index) => {
-        
+
         const item = document.createElement("div");
         item.style.display = "flex";
         item.style.alignItems = "center";
@@ -1087,7 +1088,7 @@
 
             const addEntryButton = document.getElementById("add-entry-button");
             const pickTeamMemberDropdown = document.getElementById("team-member-dropdown-2");
-            const formDate = document.querySelector(".form-date-field");
+            const formDate = document.querySelector(".date-time-input");
             const formTimeHours = document.getElementById("hours");
             const formTimeMinutes = document.getElementById("minutes");
             const formActivityDropdown = document.getElementById("choose-activity-3");
@@ -1100,9 +1101,9 @@
             const timeEntryHours = Math.floor(timeEntryTime / 3600);
             const timeEntryMinutes = Math.floor((timeEntryTime % 3600) / 60);
             const timeEntryNotes = record.fields["Notes"] || "";
-            const timeEntryActivityID = record.fields["Activities"];
-            const timeEntryCategoryID = record.fields["Categories"];
-            const timeEntryTeamMemberID = record.fields["Team Members"];
+            const timeEntryActivityID = record.fields["Activities"][0];
+            const timeEntryCategoryID = record.fields["Categories"][0];
+            const timeEntryTeamMemberID = record.fields["Team Members"][0];
 
             pickTeamMemberDropdown.value = timeEntryTeamMemberID;
             pickTeamMemberDropdown.dispatchEvent(new Event("change"));
