@@ -346,6 +346,7 @@
     return randomFunColor;
   }
 
+
   async function fetchAndPopulateDropdown(userID) {
 
     const airtableApiUrl = `https://api.airtable.com/v0/appOIyXSdFDXsvc4B/Team%20Members?filterByFormula={Users}="${userID}"`;
@@ -1150,7 +1151,8 @@
             }
 
             rightDiv.appendChild(duplicateTimeEntryButton);
-            rightDiv.appendChild(lockImage);
+            //rightDiv.appendChild(lockImage);
+            leftDiv.prepend(lockImage);
             rightContainer.appendChild(middleDiv);
             rightContainer.appendChild(rightDiv);
             newTimeEntryDiv.appendChild(rightContainer);
