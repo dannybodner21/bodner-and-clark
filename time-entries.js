@@ -51,46 +51,44 @@
     toggleSwitchSection.style.display = "none";
     teamMemberCalendarForm.style.display = "none";
 
-     window.$memberstackDom.getCurrentMember().then(({ data: member }) => {
-        if (member) {
+    window.$memberstackDom.getCurrentMember().then(async ({ data: member }) => {
+      if (member) {
+        const userEmail = member.auth.email;
 
-          const userEmail = member.auth.email;
+        try {
+          const airtableUserID = await fetchAirtableUserID(userEmail);
+          if (!airtableUserID) {
+            console.error("No Airtable User ID.");
+            return;
+          }
 
-          fetchAirtableUserID(userEmail)
-          	.then((airtableUserID) => {
-            	if (airtableUserID) {
+          hiddenUserInputField.value = airtableUserID;
 
-              	hiddenUserInputField.value = airtableUserID;
+          const customUserID = await fetchCustomUserID(airtableUserID);
+          if (!customUserID) {
+            console.error("No custom User ID.");
+            return;
+          }
 
-                fetchCustomUserID(airtableUserID).then((customUserID) => {
+          mainUserID = customUserID;
 
-                	if (customUserID) {
-                    mainUserID = customUserID;
-                    fetchAndPopulateDropdown(customUserID)
-                      .then(() => populateActivityDropdown(customUserID))
-                      .then(() => populateCategoryDropdown(customUserID))
-                      .then(() => fetchUserTimeEntries(customUserID))
-                      .then(() => {
-                          activitiesLoadingDiv.style.display = "none";
-                          toggleSwitchSection.style.display = "flex";
-                          mainSection.style.display = "flex";
-                      })
-                      .then(() => createCalendar())
-                      .catch(error => console.error("Error", error));
+          await fetchAndPopulateDropdown(customUserID);
+          await populateActivityDropdown(customUserID);
+          await populateCategoryDropdown(customUserID);
+          await fetchUserTimeEntries(customUserID);
 
-                  } else {
-                    console.error("No custom User ID.");
-                  }
-                })
-            	} else {
-            		console.error("No Airtable User ID.");
-           	 	}
-           })
-           .catch((error) => {
-             console.error("Error retrieving email:", error);
-           });
-       }
+          activitiesLoadingDiv.style.display = "none";
+          toggleSwitchSection.style.display = "flex";
+          mainSection.style.display = "flex";
+
+          createCalendar();
+
+        } catch (error) {
+          console.error("Error loading user data:", error);
+        }
+      }
     });
+
 
     // expand and collapse team member selection for calendar view
     expandDiv.addEventListener("click", () => {
@@ -195,7 +193,7 @@
       const newFiles = Array.from(event.target.files);
       const totalFiles = pendingFiles.length + newFiles.length;
 
-      if (totalFiles.length > 3) {
+      if (totalFiles > 3) {
         fileUploadWarning.style.display = "block";
         return;
       } else {
@@ -464,10 +462,8 @@
             colorMap[record.fields["Full Name"]] = randomColor;
           }
 
-          const mainUserImageUrl = "";
           if (record.fields["Role"] == "Main User") {
             targetValue = record.id;
-            mainUserImageUrl = record.fields["Image"]?.[0]?.url || "https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/683b386245d714537f5f2fb0_a1a0501fda490bd45f9c6db206c7ed8e_temp-user.png";
           }
 
           if (fullName) {
@@ -479,10 +475,6 @@
             dropdown.appendChild(option);
             const clonedOption = option.cloneNode(true);
             newTeamMemberDropdown.appendChild(clonedOption);
-
-            const imgElement = document.getElementById("team-member-image");
-            imgElement.style.backgroundImage = `url('${mainUserImageUrl}')`;
-
 
             // populate the Team Member selection for calendar view
             const teamMemberLabel = document.createElement("label");
