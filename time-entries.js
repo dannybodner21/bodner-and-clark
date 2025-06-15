@@ -217,8 +217,47 @@
 
     });
 
-    
+    const attachmentUrlInput = document.getElementById("attachment-url");
+    const fileInput = document.getElementById('time-entry-attachments');
+    const fileUploadWarning = document.getElementById("file-upload-warning");
 
+    fileInput.addEventListener("change", async function() {
+
+      let files = Array.from(fileInput.files);
+
+      if (files.length > 3) {
+        fileUploadWarning.style.display = "block";
+        // keep the first three files
+        files = files.slice(0, 3);
+      } else {
+        fileUploadWarning.style.display = "none";
+      }
+
+      const uploadUrls = [];
+
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "unsigned_upload");
+
+        try {
+          const response = await fetch("https://api.cloudinary.com/v1_1/dau4vcgfv/auto/upload", {
+            method: "POST",
+            body: formData
+          });
+
+          const data = await response.json();
+          uploadUrls.push(data.secure_url);
+
+        } catch (error) {
+          console.error("Cloudinary upload failed:", error);
+        }
+
+      }
+
+      attachmentUrlInput.value = uploadUrls.join(",");      
+
+    });
     
 
     let startTime;
