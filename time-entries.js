@@ -1,5 +1,4 @@
 
-
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -972,9 +971,10 @@
 
           // show a lock, locked if the entry year is locked, otherwise unlcoked
           const lockImage = document.createElement("img");
-          lockImage.style.width = "55px";
-          lockImage.style.height = "50px";
-          lockImage.style.marginBottom = "10px";
+          lockImage.style.width = "50px";
+          lockImage.style.height = "45px";
+          lockImage.style.marginBottom = "20px";
+          lockImage.style.marginTop = "0px";
 
           if (record.fields["Locked"] == "FALSE") {
             lockImage.src = "https://cdn.prod.website-files.com/672e681bbcdefdf7a11dd8ca/67f4215f5db49131f6daca36_unlocked_icon.png";
