@@ -189,7 +189,6 @@
       // fake submit form button - add things, then click actual submit button
       const originalFormSubmitButton = document.getElementById("original-form-submit-button");
       const fakeFormSubmitButton = document.getElementById("fake-form-submit-button");
-      const formBottomDiv = document.getElementById("form-bottom-div");
 
       fakeSubmitButton.addEventListener('click', function() {
 
@@ -207,7 +206,8 @@
         hiddenTimeField.value = totalSeconds;
         hiddenTypeField.value = `new-time-entry-form`;
 
-        formBottomDiv.style.display = "none";
+        fakeFormSubmitButton.textContent = "Working...";
+        fakeFormSubmitButton.disabled = true;
 
         originalFormSubmitButton.click();
 
