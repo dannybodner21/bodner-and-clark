@@ -464,8 +464,10 @@
             colorMap[record.fields["Full Name"]] = randomColor;
           }
 
+          //const mainUserImageUrl = "";
           if (record.fields["Role"] == "Main User") {
             targetValue = record.id;
+
           }
 
           if (fullName) {
@@ -511,6 +513,11 @@
         dropdown.removeChild(optionToMove);
         dropdown.insertBefore(optionToMove, dropdown.firstChild);
         dropdown.value = targetValue;
+
+        const selectedOption = dropdown.options[dropdown.selectedIndex];
+        const selectedImageUrl = selectedOption.getAttribute("data-image-url");
+        const imgElement = document.getElementById("team-member-image");
+        imgElement.src = selectedImageUrl || "";
       }
 
     } catch (error) {
