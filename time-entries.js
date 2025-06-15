@@ -398,10 +398,13 @@
             colorMap[record.fields["Full Name"]] = randomColor;
           }
 
+          if (record.fields["Role"] == "Main User") {
+            targetValue = record.id;
+          }
+
           if (fullName) {
             const option = document.createElement("option");
             option.value = record.id;
-            targetValue = record.id;
             option.textContent = fullName;
             const imageUrl = record.fields["Image"]?.[0]?.url || "";
             option.setAttribute("data-image-url", imageUrl);
@@ -748,7 +751,14 @@
 
       const data = await response.json();
 
-      // Display Time Entries
+      // sort Time Entries newest to oldest
+      data.records.sort((a, b) => {
+        const dateA = new Date(a.fields["Date"]);
+        const dateB = new Date(b.fields["Date"]);
+        return dateB - dateA;
+      });
+
+      // display Time Entries
       if (data.records && data.records.length > 0) {
         for (const record of data.records) {
 
