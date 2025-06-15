@@ -184,6 +184,64 @@
       }
     });
 
+    const attachmentUrlInput = document.getElementById("attachment-url");
+    const fileInput = document.getElementById('time-entry-attachments');
+    const fileUploadWarning = document.getElementById("file-upload-warning");
+    const filePreview = document.getElementById("file-preview");
+    let pendingFiles = [];
+
+    fileInput.addEventListener("change", (event) => {
+
+      const newFiles = Array.from(event.target.files);
+      const totalFiles = pendingFiles.length + newFiles.length;
+
+      if (totalFiles.length > 3) {
+        fileUploadWarning.style.display = "block";
+        return;
+      } else {
+        fileUploadWarning.style.display = "none";
+      }
+
+      pendingFiles = pendingFiles.concat(newFiles);
+      updateFilePreview();     
+
+    });
+
+    function updateFilePreview() {
+      filePreview.innerHTML = "";
+      pendingFiles.forEach((file, index) => {
+        const item = document.createElement("p");
+        item.textContent = `${index + 1}. ${file.name}`;
+        filePreview.appendChild(item);
+      });
+    }
+
+    async function uploadFilesToCloudinary() {
+
+      const uploadedFiles = [];
+
+      for (const file of pendingFiles) {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "unsigned_upload");
+
+        const response = await fetch("https://api.cloudinary.com/v1_1/dau4vcgfv/auto/upload", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to upload file.");
+        }
+
+        const data = await response.json();
+        uploadedFiles.push(data.secure_url);
+      }
+
+      return uploadedFiles;
+
+    }
+
     waitForElement('#fake-form-submit-button', function(fakeSubmitButton) {
 
       // fake submit form button - add things, then click actual submit button
@@ -191,7 +249,7 @@
       const fakeFormSubmitButton = document.getElementById("fake-form-submit-button");
       const formBottomDiv = document.getElementById("form-bottom-div");
 
-      fakeSubmitButton.addEventListener('click', function() {
+      fakeSubmitButton.addEventListener('click', async function() {
 
         teamMemberInput.value = teamMemberName.textContent.trim();
         userTimeZoneField.value = userTimeZone;
@@ -207,8 +265,19 @@
         hiddenTimeField.value = totalSeconds;
         hiddenTypeField.value = `new-time-entry-form`;
 
-        originalFormSubmitButton.click();
+        // attachments
+        if (pendingFiles.length > 0) {
+          try {
+            const uploadedUrls = await uploadFilesToCloudinary();
+            attachmentUrlInput.value = uploadedUrls.join(",");
 
+          } catch (error) {
+            alert("File upload failed: " + error);
+            return;
+          }
+        }
+
+        originalFormSubmitButton.click();
       });
 
       form.addEventListener('success', function () {
@@ -217,48 +286,6 @@
 
     });
 
-    const attachmentUrlInput = document.getElementById("attachment-url");
-    const fileInput = document.getElementById('time-entry-attachments');
-    const fileUploadWarning = document.getElementById("file-upload-warning");
-
-    fileInput.addEventListener("change", async function() {
-
-      let files = Array.from(fileInput.files);
-
-      if (files.length > 3) {
-        fileUploadWarning.style.display = "block";
-        // keep the first three files
-        files = files.slice(0, 3);
-      } else {
-        fileUploadWarning.style.display = "none";
-      }
-
-      const uploadUrls = [];
-
-      for (const file of files) {
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("upload_preset", "unsigned_upload");
-
-        try {
-          const response = await fetch("https://api.cloudinary.com/v1_1/dau4vcgfv/auto/upload", {
-            method: "POST",
-            body: formData
-          });
-
-          const data = await response.json();
-          uploadUrls.push(data.secure_url);
-
-        } catch (error) {
-          console.error("Cloudinary upload failed:", error);
-        }
-
-      }
-
-      attachmentUrlInput.value = uploadUrls.join(",");      
-
-    });
-    
 
     let startTime;
   	let timerInterval;
