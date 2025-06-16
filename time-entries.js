@@ -883,6 +883,12 @@
           leftDiv.style.display = "flex";
           leftDiv.style.flexDirection = "column";
 
+          // attachments div
+          const attachmentsDiv = document.createElement("div");
+          attachmentsDiv.style.display = "flex";
+          attachmentsDiv.style.flexDirection = "column";
+          attachmentsDiv.style.margin = "20px";
+
           // to hold middle and right
           const rightContainer = document.createElement("div");
           rightContainer.style.display = "flex";
@@ -933,6 +939,29 @@
           const teamMemberID = record.fields["Team Members"];
           const timeEntryTeamMember = await fetchTeamMemberName(teamMemberID);
           const timeEntryTeamMemberText = `Team Member: ${timeEntryTeamMember}`;
+
+          // attachments
+          const attachments = record.fields["Attachment (from Attachments)"] || [];
+          const attachmentsLabel = document.createElement("p");
+          attachmentsLabel.style.fontSize = "14px";
+          attachmentsLabel.style.padding = "10px";
+          let attachmentsHeader = "";
+          if (attachments.length > 0) {
+            attachmentsHeader = "Attachments:";
+            for (i=0; i < attachments.length; i++) {
+              const link = document.createElement("a");
+              link.style.padding = "10px";
+              link.href = attachments[0];
+              link.target = "_blank";
+              link.textContent = `Attachment ${i+1}`;
+              link.style.display = "block";
+              attachmentsDiv.appendChild(link);
+            }
+          } else {
+            attachmentsHeader = "No attachments";
+          }
+          attachmentsLabel.textContent = attachmentsHeader;
+          attachmentsDiv.prepend(attachmentsLabel);
 
           if (timeEntryTeamMemberText) {
             timeEntryTeamMemberElement.textContent = timeEntryTeamMemberText;
@@ -1256,6 +1285,7 @@
 
             rightDiv.appendChild(duplicateTimeEntryButton);
             leftDiv.prepend(lockImage);
+            newTimeEntryDiv.appendChild(attachmentsDiv);
             rightContainer.appendChild(middleDiv);
             rightContainer.appendChild(rightDiv);
             newTimeEntryDiv.appendChild(rightContainer);
