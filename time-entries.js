@@ -887,7 +887,7 @@
           const attachmentsDiv = document.createElement("div");
           attachmentsDiv.style.display = "flex";
           attachmentsDiv.style.flexDirection = "column";
-          attachmentsDiv.style.margin = "20px";
+          attachmentsDiv.style.marginRight = "40px";
 
           // to hold middle and right
           const rightContainer = document.createElement("div");
@@ -943,14 +943,16 @@
           // attachments
           const attachments = record.fields["Attachment (from Attachments)"] || [];
           const attachmentsLabel = document.createElement("p");
-          attachmentsLabel.style.fontSize = "14px";
+          attachmentsLabel.style.fontSize = "16px";
+          attachmentsLabel.style.fontWeight = "500";
           attachmentsLabel.style.padding = "10px";
           let attachmentsHeader = "";
           if (attachments.length > 0) {
             attachmentsHeader = "Attachments:";
             for (i=0; i < attachments.length; i++) {
               const link = document.createElement("a");
-              link.style.padding = "10px";
+              link.style.padding = "5px";
+              link.style.marginRight = "10px";
               link.href = attachments[0];
               link.target = "_blank";
               link.textContent = `Attachment ${i+1}`;
