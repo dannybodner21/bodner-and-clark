@@ -953,7 +953,7 @@
               const link = document.createElement("a");
               link.style.padding = "5px";
               link.style.marginRight = "10px";
-              link.href = attachments[0];
+              link.href = attachments[i];
               link.target = "_blank";
               link.textContent = `Attachment ${i+1}`;
               link.style.display = "block";
