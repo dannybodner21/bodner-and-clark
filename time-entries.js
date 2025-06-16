@@ -1285,7 +1285,7 @@
 
             rightDiv.appendChild(duplicateTimeEntryButton);
             leftDiv.prepend(lockImage);
-            newTimeEntryDiv.appendChild(attachmentsDiv);
+            rightContainer.appendChild(attachmentsDiv);
             rightContainer.appendChild(middleDiv);
             rightContainer.appendChild(rightDiv);
             newTimeEntryDiv.appendChild(rightContainer);
