@@ -1,4 +1,5 @@
 
+
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -856,12 +857,12 @@
 
           // if the Time Entry is 'deleted', don't show it in results
           // if a Category is deleted, don't show Time Entries associated with that Category
-          if ((record.fields["Deleted"] === "TRUE") || 
-              (record.fields["Deleted Category"] === "TRUE") ||
-              (record.fields["Deleted Team Member"] === "TRUE") ||
-              (record.fields["Deleted Activity"] === "TRUE")) 
+          if ((record.fields["Deleted"] == "TRUE") || 
+              (record.fields["Deleted Category"] == "TRUE") ||
+              (record.fields["Deleted Team Member"] == "TRUE") ||
+              (record.fields["Deleted Activity"] == "TRUE")) 
           {
-            if (record.fields["Deleted"] === "TRUE") {
+            if (record.fields["Deleted"] == "TRUE") {
               // if there are any deleted Time Entries, show the restore button
               const restoreDeletedTimeEntriesDiv = document.getElementById("restore-deleted-time-entries-div");
               restoreDeletedTimeEntriesDiv.style.display = "flex";
