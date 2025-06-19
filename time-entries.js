@@ -1,4 +1,5 @@
 
+
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -1148,6 +1149,20 @@
             const timeEntryActivityID = record.fields["Activities"][0];
             const timeEntryCategoryID = record.fields["Categories"][0];
             const timeEntryTeamMemberID = record.fields["Team Members"][0];
+
+
+
+            console.log("team member selected id");
+            console.log(timeEntryTeamMemberID);
+            if (!pickTeamMemberDropdown) {
+              console.error("Dropdown not found.");
+            } else {
+              console.log("Team Member Dropdown Values:");
+              [...pickTeamMemberDropdown.options].forEach((opt, i) => {
+                console.log(`Option ${i}: value = ${opt.value}, label = ${opt.textContent}`);
+              });
+            }
+
 
             pickTeamMemberDropdown.value = timeEntryTeamMemberID;
             pickTeamMemberDropdown.dispatchEvent(new Event("change"));
