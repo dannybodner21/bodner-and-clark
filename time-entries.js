@@ -1126,7 +1126,7 @@
 
             const addEntryButton = document.getElementById("add-entry-button");
             const pickTeamMemberDropdown = document.getElementById("team-member-dropdown-2");
-            const formDate = document.querySelector(".date-time-input");
+            const formDate = document.getElementById("date-time-input");
             const formTimeHours = document.getElementById("hours");
             const formTimeMinutes = document.getElementById("minutes");
             const formActivityDropdown = document.getElementById("choose-activity-3");
@@ -1145,7 +1145,13 @@
 
             pickTeamMemberDropdown.value = timeEntryTeamMemberID;
             pickTeamMemberDropdown.dispatchEvent(new Event("change"));
-            formDate.value = timeEntryDate;
+
+            console.log(timeEntryDate);
+
+            if (formDate && timeEntryDate) {
+              formDate.value = timeEntryDate;
+            }
+
             formTimeHours.value = timeEntryHours;
             formTimeMinutes.value = timeEntryMinutes;
             formActivityDropdown.value = timeEntryActivityID;
