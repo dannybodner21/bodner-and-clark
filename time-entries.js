@@ -1,5 +1,4 @@
 
-
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -1073,7 +1072,7 @@
               deleteTimeEntryBackground.style.display = "flex";
               deleteTimeEntryPopup.style.display = "flex";
               deleteTimeEntryBackground.style.opacity = "100%";
-              deleteTimeEntryPopup.style.display = "100%";
+              deleteTimeEntryPopup.style.opacity = "100%";
               const confirmDeleteButton = document.getElementById("confirm-delete-time-entry-button");
 
               confirmDeleteButton.onclick = async function() {
