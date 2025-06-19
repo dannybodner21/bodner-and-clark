@@ -860,11 +860,12 @@
               (record.fields["Deleted Category"] == "TRUE") ||
               (record.fields["Deleted Team Member"] == "TRUE")) 
           {
-
-            // if there are any deleted Time Entries, show the restore button
-            const restoreDeletedTimeEntriesDiv = document.getElementById("restore-deleted-time-entries-div");
-            restoreDeletedTimeEntriesDiv.style.display = "flex";
-
+            if (record.fields["Deleted"] == "TRUE") {
+              // if there are any deleted Time Entries, show the restore button
+              const restoreDeletedTimeEntriesDiv = document.getElementById("restore-deleted-time-entries-div");
+              restoreDeletedTimeEntriesDiv.style.display = "flex";
+            }
+            
             continue;
           }
 
