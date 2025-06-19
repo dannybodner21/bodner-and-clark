@@ -855,7 +855,8 @@
           userTimeEntryIDs.push(record.id);
 
           // if the Time Entry is 'deleted', don't show it in results
-          if (record.fields["Deleted"] == "TRUE") {
+          // if a Category is deleted, don't show Time Entries associated with that Category
+          if ((record.fields["Deleted"] == "TRUE") || (record.fields["Deleted Category"] == "TRUE")) {
 
             // if there are any deleted Time Entries, show the restore button
             const restoreDeletedTimeEntriesDiv = document.getElementById("restore-deleted-time-entries-div");
