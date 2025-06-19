@@ -1066,32 +1066,39 @@
             // know what to delete
             deleteTimeEntryButton.id = record.id;
 
-            deleteTimeEntryButton.addEventListener("click", async function () {
+            deleteTimeEntryButton.addEventListener("click", function () {
 
-              const confirmDelete = confirm("Are you sure you want to delete this Time Entry?");
-              if (!confirmDelete) return;
+              const deleteTimeEntryBackground = document.getElementById("delete-time-entry-background");
+              const deleteTimeEntryPopup = document.getElementById("delete-time-entry-popup");
+              deleteTimeEntryBackground.style.display = "flex";
+              deleteTimeEntryPopup.style.display = "flex";
+              deleteTimeEntryBackground.style.opacity = "100%";
+              deleteTimeEntryPopup.style.display = "100%";
+              const confirmDeleteButton = document.getElementById("confirm-delete-time-entry-button");
 
-              // change Deleted to TRUE
-              const timeEntryRecordId = deleteTimeEntryButton.id;
-              const airtableApiUrlForUpdates = `https://api.airtable.com/v0/appOIyXSdFDXsvc4B/Time%20Entries/${timeEntryRecordId}`;
-              const updatedFields = { Deleted: "TRUE" };
+              confirmDeleteButton.onclick = async function() {
+                // change Deleted to TRUE
+                const timeEntryRecordId = deleteTimeEntryButton.id;
+                const airtableApiUrlForUpdates = `https://api.airtable.com/v0/appOIyXSdFDXsvc4B/Time%20Entries/${timeEntryRecordId}`;
+                const updatedFields = { Deleted: "TRUE" };
 
-              const updateResponse = await fetch(airtableApiUrlForUpdates, {
-                  method: "PATCH",
-                  headers: {
-                      "Authorization": `Bearer patSuO07S3t9lyKXO.0f279eed33a5d602727ad92819a9b9cfdf690d4179830edc5213baca03891485`,
-                      "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify({
-                      fields: updatedFields
-                  })
-              });
+                const updateResponse = await fetch(airtableApiUrlForUpdates, {
+                    method: "PATCH",
+                    headers: {
+                        "Authorization": `Bearer patSuO07S3t9lyKXO.0f279eed33a5d602727ad92819a9b9cfdf690d4179830edc5213baca03891485`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        fields: updatedFields
+                    })
+                });
 
-              if (updateResponse.ok) {
-                  console.log("Time Entry updated successfully!");
-              } else {
-                  console.log("Error updating Time Entry.");
-              }
+                if (updateResponse.ok) {
+                    console.log("Time Entry updated successfully!");
+                } else {
+                    console.log("Error updating Time Entry.");
+                }
+              };
 
             });
           }
@@ -1147,9 +1154,11 @@
             pickTeamMemberDropdown.dispatchEvent(new Event("change"));
 
             console.log(timeEntryDate);
+            const trimmedDate = timeEntryDate.slice(0, 16);
 
-            if (formDate && timeEntryDate) {
-              formDate.value = timeEntryDate;
+            if (formDate && trimmedDate) {
+              console.log("form date input and date item exist");
+              formDate.value = trimmedDate;
             }
 
             formTimeHours.value = timeEntryHours;
