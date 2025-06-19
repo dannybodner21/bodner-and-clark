@@ -1156,7 +1156,7 @@
               formActivityDropdown.dispatchEvent(new Event("change"));
               formCategoryDropdown.value = timeEntryCategoryID;
               formCategoryDropdown.dispatchEvent(new Event("change"));
-            }, 100);
+            }, 1000);
 
             const trimmedDate = timeEntryDate.slice(0, 16);
             if (formDate && trimmedDate) {
