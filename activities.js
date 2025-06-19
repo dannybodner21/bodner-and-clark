@@ -1,5 +1,4 @@
 
-
     // using this to store all user Activity IDs
     // this way I can easily restore all of them if the user decides
     // to restore soft deleted Activities
@@ -156,18 +155,16 @@
   
       // if trade or business, show 11 options div
       tradeOrBusinessRadioYes.addEventListener("change", function () {
-          if (this.checked) {
-              tradeOrBusinessOptionsDiv.style.display = "block";
-  
-              var tradeOrBusinessSelected = tradeOrBusinessValues.value !== "";
-              if (!tradeOrBusinessSelected) {
+        if (this.checked) {
+          tradeOrBusinessOptionsDiv.style.display = "block";
 
-                  // make sure at minimum first option is selected
-                  if (tradeOrBusinessValues) {
-                    tradeOrBusinessValues.selectedIndex = 0;
-                  }
-              }
+          if (tradeOrBusinessValues && tradeOrBusinessValues.options.length > 0) {
+            var tradeOrBusinessSelected = tradeOrBusinessValues.value !== "";
+            if (!tradeOrBusinessSelected) {
+              tradeOrBusinessValues.selectedIndex = 0;
+            }
           }
+        }
       });
   
       // if no trade or business, hide 11 options div
@@ -639,6 +636,7 @@
       return await Promise.all(fetchPromises);
     }
   
+
     async function fetchUserActivities(userID) {
   
       const airtableApiUrl = `https://api.airtable.com/v0/appOIyXSdFDXsvc4B/Activities?filterByFormula={Users}="${userID}"`;
@@ -712,6 +710,7 @@
   
             const activityText = document.createElement("p");
             activityText.classList.add("display-text");
+            activityText.style.paddingTop = "20px";
             const activityName = record.fields["Name"];
   
             if (activityName) {
