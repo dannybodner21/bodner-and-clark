@@ -1,5 +1,4 @@
 
-
   // to store all user Time Entry IDs
   // this way I can easily restore all of them if the user decides
   // to restore soft deleted Time Entries
@@ -1150,37 +1149,22 @@
             const timeEntryCategoryID = record.fields["Categories"][0];
             const timeEntryTeamMemberID = record.fields["Team Members"][0];
 
+            setTimeout(() => {
+              pickTeamMemberDropdown.value = timeEntryTeamMemberID;
+              pickTeamMemberDropdown.dispatchEvent(new Event("change"));
+              formActivityDropdown.value = timeEntryActivityID;
+              formActivityDropdown.dispatchEvent(new Event("change"));
+              formCategoryDropdown.value = timeEntryCategoryID;
+              formCategoryDropdown.dispatchEvent(new Event("change"));
+            }, 100);
 
-
-            console.log("team member selected id");
-            console.log(timeEntryTeamMemberID);
-            if (!pickTeamMemberDropdown) {
-              console.error("Dropdown not found.");
-            } else {
-              console.log("Team Member Dropdown Values:");
-              [...pickTeamMemberDropdown.options].forEach((opt, i) => {
-                console.log(`Option ${i}: value = ${opt.value}, label = ${opt.textContent}`);
-              });
-            }
-
-
-            pickTeamMemberDropdown.value = timeEntryTeamMemberID;
-            pickTeamMemberDropdown.dispatchEvent(new Event("change"));
-
-            console.log(timeEntryDate);
             const trimmedDate = timeEntryDate.slice(0, 16);
-
             if (formDate && trimmedDate) {
-              console.log("form date input and date item exist");
               formDate.value = trimmedDate;
             }
 
             formTimeHours.value = timeEntryHours;
             formTimeMinutes.value = timeEntryMinutes;
-            formActivityDropdown.value = timeEntryActivityID;
-            formActivityDropdown.dispatchEvent(new Event("change"));
-            formCategoryDropdown.value = timeEntryCategoryID;
-            formCategoryDropdown.dispatchEvent(new Event("change"));
             formNotes.value = timeEntryNotes;
 
             // open side panel
