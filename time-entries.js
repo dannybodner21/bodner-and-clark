@@ -872,19 +872,11 @@
 
           // new main div
           const newTimeEntryDiv = document.createElement("div");
-          newTimeEntryDiv.style.display = "flex";
-          newTimeEntryDiv.style.justifyContent = "space-between";
-          newTimeEntryDiv.style.alignItems = "center";
-          newTimeEntryDiv.style.border = "1px solid #e3e3e3";
-          newTimeEntryDiv.style.padding = "10px";
-          newTimeEntryDiv.style.paddingLeft = "25px";
-          newTimeEntryDiv.style.paddingRight = "25px";
-          newTimeEntryDiv.style.width = "100%";
-          newTimeEntryDiv.style.margin = "10px auto";
-          newTimeEntryDiv.style.borderRadius = "15px";
+          newTimeEntryDiv.classList.add("newTimeEntryDiv");
+    
           newTimeEntryDiv.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
 
-		  // left div
+		      // left div
           const leftDiv = document.createElement("div");
           leftDiv.style.display = "flex";
           leftDiv.style.flexDirection = "column";
@@ -900,12 +892,12 @@
           rightContainer.style.display = "flex";
           rightContainer.style.alignItems = "center";
 
-		  // new middle div
+		      // new middle div
           const middleDiv = document.createElement("div");
           middleDiv.style.textAlign = "center";
           middleDiv.style.paddingRight = "30px";
 
-		  // new right div
+		      // new right div
           const rightDiv = document.createElement("div");
           rightDiv.style.display = "flex";
           rightDiv.style.flexDirection = "column";
