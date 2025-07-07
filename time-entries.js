@@ -887,10 +887,6 @@
           const attachmentsDiv = document.createElement("div");
           attachmentsDiv.classList.add("attachmentsDiv");
 
-          attachmentsDiv.style.display = "flex";
-          attachmentsDiv.style.flexDirection = "column";
-          attachmentsDiv.style.marginRight = "40px";
-
           // to hold middle and right
           const rightContainer = document.createElement("div");
           rightContainer.classList.add("rightContainer");
@@ -905,11 +901,6 @@
 		      // new right div
           const rightDiv = document.createElement("div");
           rightDiv.classList.add("rightDiv");
-
-          rightDiv.style.display = "flex";
-          rightDiv.style.flexDirection = "column";
-          rightDiv.style.alignItems = "flex-end";
-          rightDiv.style.gap = "10px";
 
           // retrieve the Activity name
           const timeEntryActivityElement = document.createElement("p");
