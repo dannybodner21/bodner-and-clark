@@ -902,6 +902,10 @@
           const rightDiv = document.createElement("div");
           rightDiv.classList.add("rightDiv");
 
+          // to hold the delete, edit and duplicate buttons
+          const buttonsDiv = document.createElement("div");
+          buttonsDiv.classList.add("buttonsDiv");
+
           // retrieve the Activity name
           const timeEntryActivityElement = document.createElement("p");
           timeEntryActivityElement.classList.add("timeEntryActivityElement");
@@ -1282,11 +1286,19 @@
           	newTimeEntryDiv.appendChild(leftDiv);
 
             if (record.fields["Locked"] == "FALSE") {
-              rightDiv.appendChild(deleteTimeEntryButton);
-              rightDiv.appendChild(editTimeEntryButton);
+              buttonsDiv.appendChild(deleteTimeEntryButton);
+              buttonsDiv.appendChild(editTimeEntryButton);
+
+              // rightDiv.appendChild(deleteTimeEntryButton);
+              // rightDiv.appendChild(editTimeEntryButton);
             }
 
-            rightDiv.appendChild(duplicateTimeEntryButton);
+            buttonsDiv.appendChild(duplicateTimeEntryButton);
+
+            // rightDiv.appendChild(duplicateTimeEntryButton);
+
+            rightDiv.appendChild(buttonsDiv);
+
             leftDiv.prepend(lockImage);
             rightContainer.appendChild(attachmentsDiv);
             rightContainer.appendChild(middleDiv);
