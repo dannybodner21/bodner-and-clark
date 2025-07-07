@@ -878,27 +878,34 @@
 
 		      // left div
           const leftDiv = document.createElement("div");
+          leftDiv.classList.add("leftDiv");
+
           leftDiv.style.display = "flex";
           leftDiv.style.flexDirection = "column";
 
           // attachments div
           const attachmentsDiv = document.createElement("div");
+          attachmentsDiv.classList.add("attachmentsDiv");
+
           attachmentsDiv.style.display = "flex";
           attachmentsDiv.style.flexDirection = "column";
           attachmentsDiv.style.marginRight = "40px";
 
           // to hold middle and right
           const rightContainer = document.createElement("div");
-          rightContainer.style.display = "flex";
-          rightContainer.style.alignItems = "center";
+          rightContainer.classList.add("rightContainer");
 
 		      // new middle div
           const middleDiv = document.createElement("div");
+          middleDiv.classList.add("middleDiv");
+
           middleDiv.style.textAlign = "center";
           middleDiv.style.paddingRight = "30px";
 
 		      // new right div
           const rightDiv = document.createElement("div");
+          rightDiv.classList.add("rightDiv");
+
           rightDiv.style.display = "flex";
           rightDiv.style.flexDirection = "column";
           rightDiv.style.alignItems = "flex-end";
@@ -906,14 +913,13 @@
 
           // retrieve the Activity name
           const timeEntryActivityElement = document.createElement("p");
-          timeEntryActivityElement.style.fontSize = "18px";
-          timeEntryActivityElement.style.fontWeight = "700";
-          timeEntryActivityElement.style.paddingLeft = "25px";
+          timeEntryActivityElement.classList.add("timeEntryActivityElement");
+
           const activityID = record.fields["Activities"];
           // query the Activity name
           const timeEntryActivityText = await fetchActivityName(activityID);
 
-		  // retrieve the Category name
+		      // retrieve the Category name
           const timeEntryCategoryElement = document.createElement("p");
           timeEntryCategoryElement.style.fontSize = "12px";
           timeEntryCategoryElement.style.fontWeight = "400";
@@ -930,10 +936,8 @@
           }
 
           const timeEntryTeamMemberElement = document.createElement("p");
-          timeEntryTeamMemberElement.style.fontSize = "12px";
-          timeEntryTeamMemberElement.style.fontWeight = "400";
-          timeEntryTeamMemberElement.style.marginTop = "5px";
-          timeEntryTeamMemberElement.style.paddingLeft = "40px";
+          timeEntryTeamMemberElement.classList.add("timeEntryTeamMemberElement");
+
           const teamMemberID = record.fields["Team Members"];
           const timeEntryTeamMember = await fetchTeamMemberName(teamMemberID);
           const timeEntryTeamMemberText = `Team Member: ${timeEntryTeamMember}`;
@@ -941,9 +945,8 @@
           // attachments
           const attachments = record.fields["Attachment (from Attachments)"] || [];
           const attachmentsLabel = document.createElement("p");
-          attachmentsLabel.style.fontSize = "16px";
-          attachmentsLabel.style.fontWeight = "500";
-          attachmentsLabel.style.padding = "10px";
+          attachmentsLabel.classList.add("attachmentsLabel");
+
           let attachmentsHeader = "";
           if (attachments.length > 0) {
             attachmentsHeader = "Attachments:";
@@ -969,10 +972,8 @@
           }
 
           const timeEntryNotesElement = document.createElement("p");
-          timeEntryNotesElement.style.fontSize = "12px";
-          timeEntryNotesElement.style.fontWeight = "400";
-          timeEntryNotesElement.style.marginTop = "5px";
-          timeEntryNotesElement.style.paddingLeft = "40px";
+          timeEntryNotesElement.classList.add("timeEntryNotesElement");
+
           const notes = record.fields["Notes"] || "None";
           const timeEntryNotes = `Notes: ${notes}`;
 
@@ -982,10 +983,8 @@
           }
 
           const timeEntryDateElement = document.createElement("p");
-          timeEntryDateElement.style.fontSize = "14px";
-          timeEntryDateElement.style.fontWeight = "400";
-          timeEntryDateElement.style.marginTop = "5px";
-          timeEntryDateElement.style.paddingLeft = "15px";
+          timeEntryDateElement.classList.add("timeEntryDateElement");
+
           const databaseDate = record.fields["Date"];
           const { DateTime } = luxon;
           const timeEntryDate = DateTime
@@ -999,9 +998,8 @@
           }
 
           const timeEntryTimeElement = document.createElement("p");
-          timeEntryTimeElement.style.fontSize = "25px";
-          timeEntryTimeElement.style.fontWeight = "800";
-          timeEntryTimeElement.style.marginTop = "10px";
+          timeEntryTimeElement.classList.add("timeEntryTimeElement");
+
           const timeEntryTime = record.fields["Time"];
 
           let finalTimeEntryTime = '00:00';
@@ -1009,7 +1007,7 @@
           const timeEntryMinutes = Math.floor((timeEntryTime % 3600) / 60);
           const formattedTimeEntryHours = String(timeEntryHours).padStart(2, "0");
           const formattedTimeEntryMinutes = String(timeEntryMinutes).padStart(2, "0");
-          finalTimeEntryTime = `${formattedTimeEntryHours}:${formattedTimeEntryMinutes}`;
+          finalTimeEntryTime = `${formattedTimeEntryHours}h:${formattedTimeEntryMinutes}m`;
           if (timeEntryTime) {
             timeEntryTimeElement.textContent = finalTimeEntryTime;
             middleDiv.appendChild(timeEntryTimeElement);
